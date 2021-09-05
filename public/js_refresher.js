@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-//s'use strict';
+'use strict';
 // import { all_vaccine_centers as vaccineCentersRes } from "./vaccine_register";
 import dummyVaccineCentersRes from "./dummyVaccineCentersRes.js";
 var v = "Hi! I'm a strict mode script!";
@@ -13,12 +13,14 @@ const centersAtZipcode = (zipcode, centersData) => {
     const { features } = centersData;
     return features.filter(feature => feature?.properties?.postal_code === zipcode);
 }
+// const res = centersAtZipcode("95113", dummyVaccineCentersRes)
 
 // 1.1 use of typeof
 // check input and return 1 if its number else 0
 const isNumber = (input) => {
     return typeof(input) === 'number' ? 1 : 0
 }
+// isNumber("95113") => returns false
 
 //1.1 use of slice 
 // get elements of array from index 3 to 6 and save it in sliceArray given length of array is greater than 10
@@ -71,16 +73,6 @@ powByFactor(5); // returns 5 to the power 5
 //1.3
 // export and import/require is used in this file. Also used in index.js to import/require express
 
-// class Static Method
-// create class with student of se program. but create a unique method which returns program advisor
-// independent of student.
-
-class SeStudent {
-    static getProgramAdvisor() {
-        return "Dan Harkey"
-    }
-}
-SeStudent.getProgramAdvisor(); // Returns "Dan Harkey"
 
 // check whether password is min of 6 character having 1 lowercase, 1 uppercase, 1 special character.
 const regex = '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$';
@@ -91,7 +83,50 @@ let customer = 'john'
 const getWelcomeMsg = (name) => `Hello ${name}, welcome to the store`
 getWelcomeMsg(customer ='')
 
-// TODO: 1.4
+// class Static Method
+// create class with student of sjsu. create a static method which returns univ president of sjsu
+// independent of student object. 
+// Then create a subclass of same class for sjsu se major student overriding few of the methods from above.
+
+
+// 1.3 statc + 1.4 inheritance  + static + object assign
+class SjsuStudent {
+    constructor(id, name, major, programAdvisor, totalCredits) {
+        // copying all the initalization fields into this object
+        Object.assign(this, {id, name, major, programAdvisor, totalCredits})
+    }
+
+    // Static methods are called directly on class and not on object. this are class specific methods and doesnt usually change with class objects.
+    static getUnivPresident() {
+        return "Mary A. Papazian"
+    }
+
+    getTotalCredits() {
+        return this.totalCredits;
+    }
+
+    getStudentAcademicDetails() {
+        return `Major: ${this.major} Advisor: ${this.programAdvisor}, totalcredits: ${this.totalCredits}`;
+    }
+}
+
+// console.log("president", SjsuStudent.getUnivPresident()); // Returns "Mary A. Papazian"
+
+// inheritance can be used in classes with extend keyword
+class SeStudent extends SjsuStudent{
+    constructor(id, name, totalCredits, specialisation) {
+        super(id, name, "Software Engineering", "Dan Harkey", totalCredits);
+        Object.assign(this, { specialisation})
+    }
+
+    getStudentAcademicDetails() {
+        return super.getStudentAcademicDetails() + `, Choosen specialisation: ${this.specialisation}`
+    }
+}
+
+let s1 = new SeStudent("014955585","Ayush Gupta", 33, "Enterprise Software Engineering");
+console.log("My academic details:", s1.getStudentAcademicDetails());
+console.log("credits", s1.getTotalCredits());
 
 
 //1.5 api call done in html application using agex
@@ -127,10 +162,10 @@ getAdvisorNameAndCoreSubjectsCode.call(ceStudent, "cmpe 200", "cmpe 220", "cmpe 
 getAdvisorNameAndCoreSubjectsCode.apply(seStudent, ["cmpe 255", "cmpe 202", "cmpe 272"]);
 
 // 1.6
-//b var, let, const
+// b var, let, const
 // var => can be redefined, has functional scope and not block scope
 // PS: say "welcome" to customer when he comes first time else say "hello"
-function greet(count) {
+function greet(count=1) {
     var msg = "hello"
     if (count === 1) {
         var msg = 'welcome'
@@ -172,11 +207,13 @@ const afterVaccineShot = (callback) => {
     setTimeout(callback, 600000)
 }
 afterVaccineShot(leaveHospital);
+
 //Promise
 const afterVaccineShot2 = new Promise((resolve) => {
     setTimeout(() => resolve(leaveHospital), 600000)
 })
 afterVaccineShot2.then(result => result())
+
 //Async Await
 async function afterVaccineShot3() {
     await new Promise(resolve => {
@@ -187,8 +224,28 @@ async function afterVaccineShot3() {
 afterVaccineShot3();
 
 export const runJsScript = () => {
-    const res = centersAtZipcode("95113", dummyVaccineCentersRes) 
+    // This function is run on node server and its return result can be seen on different webpage url too. code in server.js
+
+    // const res = centersAtZipcode("95113", dummyVaccineCentersRes)
+    // check whether password is min of 6 character having 1 lowercase, 1 uppercase, 1 special character.
+    // const regex = '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$';
+    // const isValidPwd = (pwd) => pwd.match(regex) ? true : false
+    // console.log("is Test@123 valid:", isValidPwd("Test@123"));
+    // const res = splitString("abc#df#fg");
+    // const res = sliceArray(["a","b","c","d","e","f","g","h","i"])
+    // const res = isNumber("95113")
     // const res=  isFdaVaccine("Moderna"); // Returns true
-    console.log("res:", res);
-    return res
+    // bind
+    // let seAdvisorAndCode = getAdvisorNameAndCoreSubjectsCode.bind(seStudent); 
+    // seAdvisorAndCode("cmpe 255", "cmpe 202", "cmpe 272"); 
+    // // call
+    // getAdvisorNameAndCoreSubjectsCode.call(ceStudent, "cmpe 200", "cmpe 220", "cmpe 240");
+    // //bind
+    // getAdvisorNameAndCoreSubjectsCode.apply(seStudent, ["cmpe 255", "cmpe 202", "cmpe 272"]);
+    // console.log("res:", res);
+    // console.log("president", SjsuStudent.getUnivPresident()); // Returns "Mary A. Papazian"
+    // let s1 = new SeStudent("014955585","Ayush Gupta", 33, "Enterprise Software Engineering");
+    // console.log("My academic details:", s1.getStudentAcademicDetails());
+    // console.log("credits", s1.getTotalCredits());
+    // return res
 }

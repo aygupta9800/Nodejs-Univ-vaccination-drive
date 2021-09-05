@@ -6,19 +6,19 @@
 	<title>Registration Form</title>
 	<link rel="stylesheet" href="styles.css">
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-  <script defer src="vaccine_register.js"></script>
+  <script defer type="module" src="vaccine_register.js"></script>
 </head>
 <body>
 
 <div class="container">
     <div id="title" class="title">
-      University Vaccine Drive Registration
+      University Vaccination Drive Registration
     </div>
     <form  id="register_form" class="form">
        <div id="error"></div>
        <div class="inputContainer">
           <label for="name">Name</label>
-          <input type="text"  id='name' name= 'name' class="input" required>
+          <input type="text"  id='name' name= 'name' class="input" required autofocus>
        </div>  
        <div class="inputContainer">
             <label for='email'>Email Address</label>
@@ -26,8 +26,7 @@
         </div>
         <div class="inputContainer">
             <label for='student_id'>Student Id</label>
-            <!-- required -->
-            <input id="student_id" name="student_id" type="number" class="input">
+            <input id="student_id" name="student_id" type="number" class="input" required>
         </div>
         <div class="inputContainer">
             <label for='password'>Password</label>
@@ -92,7 +91,10 @@
           <p>I agree that I have provided correct information</p>
        </div> 
       <div class="inputContainer">
+        <button onclick="resetInput()" class="resetbtn">Reset</button>
         <input type="submit" value="Register" class="btn">
+        
+        
       </div>
     </form>
     

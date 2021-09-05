@@ -165,11 +165,22 @@ body{
 }
 
 .container .form .inputContainer .btn{
-  width: 100%;
+  width: 40%;
   padding: 6px 8px;
   font-size: 15px; 
   border: 0px;
   background:  #f8d15c;
+  color: #fff;
+  border-radius: 3px;
+}
+
+.container .form .inputContainer .resetbtn{
+  width: 40%;
+  padding: 6px 8px;
+  margin-right: 50px;
+  font-size: 15px; 
+  border: 0px;
+  background:  greenyellow;
   color: #fff;
   border-radius: 3px;
 }
