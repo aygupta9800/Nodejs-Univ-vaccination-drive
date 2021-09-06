@@ -16,7 +16,8 @@ const errorElement = document.getElementById('error');
 const afterRegister = document.getElementById('afterRegister');
 const title = document.getElementById('title');
 const displayMsg = document.getElementById('displayMsg');
-const sameZipcodeCenters = document.getElementById('sameZipcodeCenters'); 
+const sameZipcodeCenters = document.getElementById('sameZipcodeCenters');
+const reset = document.getElementById('reset'); 
 let all_vaccine_centers;
 let vaccine_center_info;
 let userLocation;
@@ -33,6 +34,7 @@ window.onload = async () => {
         };
     };
     userLocation = await getCoords();
+    console.log("userLocation==", userLocation);
 }
     
 // copied from internet to calculate distance btw two latlong points
@@ -62,7 +64,8 @@ const getVaccineName = () =>  {
 }
 
 // For reset btn functionality
-const resetInput = () => {
+reset.addEventListener("click", () => {
+    console.log("===resetInput");
     if (typeof(Storage) !== "undefined") {
         localStorage.clear();
         sessionStorage.clear();
@@ -74,7 +77,8 @@ const resetInput = () => {
         zipcode.value =  '';
         password.value = '';
     }
-}
+})
+
 
 const setLocalStorageValues = () => {
     if (typeof(Storage) !== "undefined") {
@@ -149,7 +153,6 @@ registerForm.addEventListener('submit', (e)=> {
     if (studentId.value && studentId.value.length < 5) {
         errorMsgs.push('Student Id must be atleast 5 characters')
     }
-    console.log("password", password.value.length)
     // check whether password is min of 6 character having 1 lowercase, 1 uppercase, 1 special character.
     const regex = '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$';
     const isValidPwd = (pwd) => pwd.match(regex) ? true : false
