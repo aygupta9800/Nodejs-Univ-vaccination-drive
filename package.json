@@ -9,7 +9,7 @@
     "lint": "eslint public/",
     "dev": "nodemon --exec babel-node server.js",
     "build": "babel src --out-dir build",
-    "start": "node build/server.js"
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
