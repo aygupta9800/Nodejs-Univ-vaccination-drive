@@ -65,7 +65,6 @@ const getVaccineName = () =>  {
 
 // For reset btn functionality
 reset.addEventListener("click", () => {
-    console.log("===resetInput");
     if (typeof(Storage) !== "undefined") {
         localStorage.clear();
         sessionStorage.clear();
